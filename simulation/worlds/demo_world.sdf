@@ -74,5 +74,9 @@
     </model>
 
     <!-- Drone is spawned by ArduPilot Gazebo plugin / ros_gz_sim spawn, see launch file -->
+    <include>
+    <uri>model://iris_with_gimbal</uri>
+    <pose degrees="true">0 0 0.195 0 0 90</pose>
+  </include>
   </world>
 </sdf>

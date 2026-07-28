@@ -27,6 +27,23 @@ def generate_launch_description():
         output="screen",
     )
 
+    spawn_drone = Node(
+    package="ros_gz_sim",
+    executable="create",
+    arguments=[
+        "-world", "demo_world",
+        "-name", "iris",
+        "-file",
+        os.path.expanduser(
+            "~/ardupilot_gazebo/models/iris_with_ardupilot/model.sdf"
+        ),
+        "-x", "0",
+        "-y", "0",
+        "-z", "0.2",
+    ],
+    output="screen",
+)
+
     bridge = Node(
         package="ros_gz_bridge",
         executable="parameter_bridge",
@@ -43,10 +60,17 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        gazebo,
-        bridge,
-        TimerAction(
-            period=5.0,
-            actions=[detector],
-        ),
-    ])
+    gazebo,
+
+    TimerAction(
+        period=3.0,
+        actions=[spawn_drone],
+    ),
+
+    bridge,
+
+    TimerAction(
+        period=5.0,
+        actions=[detector],
+    ),
+])

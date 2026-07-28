@@ -8,6 +8,7 @@ setup.py
 ../../build/obstacle_avoidance/obstacle_avoidance.egg-info/requires.txt
 ../../build/obstacle_avoidance/obstacle_avoidance.egg-info/top_level.txt
 ../../build/obstacle_avoidance/obstacle_avoidance.egg-info/zip-safe
+launch/sim.launch.py
 obstacle_avoidance/__init__.py
 obstacle_avoidance/obstacle_detector.py
 resource/obstacle_avoidance

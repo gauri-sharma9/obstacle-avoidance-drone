@@ -17,7 +17,7 @@ setup(
     ),
     (
         'share/' + package_name + '/launch',
-        [],
+        ['launch/sim.launch.py'],
     ),
     (
         'share/' + package_name + '/config',

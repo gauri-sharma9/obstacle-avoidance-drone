@@ -1,0 +1,44 @@
+[1.106s] Invoking command in '/home/gauri/obstacle-avoidance-drone/ros2_ws/src/obstacle_avoidance': PYTHONPATH=/home/gauri/obstacle-avoidance-drone/ros2_ws/build/obstacle_avoidance/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/gauri/obstacle-avoidance-drone/ros2_ws/install/obstacle_avoidance/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/obstacle_avoidance build --build-base /home/gauri/obstacle-avoidance-drone/ros2_ws/build/obstacle_avoidance/build install --record /home/gauri/obstacle-avoidance-drone/ros2_ws/build/obstacle_avoidance/install.log --install-scripts $base/lib/obstacle_avoidance --single-version-externally-managed install_data
+[1.273s] /home/gauri/.local/lib/python3.10/site-packages/setuptools/_distutils/dist.py:288: UserWarning: Unknown distribution option: 'tests_require'
+[1.273s]   warnings.warn(msg)
+[1.356s] running egg_info
+[1.373s] writing ../../build/obstacle_avoidance/obstacle_avoidance.egg-info/PKG-INFO
+[1.373s] writing dependency_links to ../../build/obstacle_avoidance/obstacle_avoidance.egg-info/dependency_links.txt
+[1.373s] writing entry points to ../../build/obstacle_avoidance/obstacle_avoidance.egg-info/entry_points.txt
+[1.374s] writing requirements to ../../build/obstacle_avoidance/obstacle_avoidance.egg-info/requires.txt
+[1.374s] writing top-level names to ../../build/obstacle_avoidance/obstacle_avoidance.egg-info/top_level.txt
+[1.405s] reading manifest file '../../build/obstacle_avoidance/obstacle_avoidance.egg-info/SOURCES.txt'
+[1.406s] writing manifest file '../../build/obstacle_avoidance/obstacle_avoidance.egg-info/SOURCES.txt'
+[1.407s] running build
+[1.407s] running build_py
+[1.408s] copying obstacle_avoidance/camera_detector_node.py -> /home/gauri/obstacle-avoidance-drone/ros2_ws/build/obstacle_avoidance/build/lib/obstacle_avoidance
+[1.409s] copying obstacle_avoidance/obstacle_detector.py -> /home/gauri/obstacle-avoidance-drone/ros2_ws/build/obstacle_avoidance/build/lib/obstacle_avoidance
+[1.409s] copying obstacle_avoidance/fusion_node.py -> /home/gauri/obstacle-avoidance-drone/ros2_ws/build/obstacle_avoidance/build/lib/obstacle_avoidance
+[1.409s] copying obstacle_avoidance/__init__.py -> /home/gauri/obstacle-avoidance-drone/ros2_ws/build/obstacle_avoidance/build/lib/obstacle_avoidance
+[1.409s] copying obstacle_avoidance/radar_node.py -> /home/gauri/obstacle-avoidance-drone/ros2_ws/build/obstacle_avoidance/build/lib/obstacle_avoidance
+[1.409s] copying obstacle_avoidance/lidar_node.py -> /home/gauri/obstacle-avoidance-drone/ros2_ws/build/obstacle_avoidance/build/lib/obstacle_avoidance
+[1.410s] copying obstacle_avoidance/avoidance_node.py -> /home/gauri/obstacle-avoidance-drone/ros2_ws/build/obstacle_avoidance/build/lib/obstacle_avoidance
+[1.410s] running install
+[1.415s] running install_lib
+[1.429s] copying /home/gauri/obstacle-avoidance-drone/ros2_ws/build/obstacle_avoidance/build/lib/obstacle_avoidance/fusion_node.py -> /home/gauri/obstacle-avoidance-drone/ros2_ws/install/obstacle_avoidance/lib/python3.10/site-packages/obstacle_avoidance
+[1.429s] copying /home/gauri/obstacle-avoidance-drone/ros2_ws/build/obstacle_avoidance/build/lib/obstacle_avoidance/lidar_node.py -> /home/gauri/obstacle-avoidance-drone/ros2_ws/install/obstacle_avoidance/lib/python3.10/site-packages/obstacle_avoidance
+[1.429s] copying /home/gauri/obstacle-avoidance-drone/ros2_ws/build/obstacle_avoidance/build/lib/obstacle_avoidance/avoidance_node.py -> /home/gauri/obstacle-avoidance-drone/ros2_ws/install/obstacle_avoidance/lib/python3.10/site-packages/obstacle_avoidance
+[1.430s] byte-compiling /home/gauri/obstacle-avoidance-drone/ros2_ws/install/obstacle_avoidance/lib/python3.10/site-packages/obstacle_avoidance/fusion_node.py to fusion_node.cpython-310.pyc
+[1.431s] byte-compiling /home/gauri/obstacle-avoidance-drone/ros2_ws/install/obstacle_avoidance/lib/python3.10/site-packages/obstacle_avoidance/lidar_node.py to lidar_node.cpython-310.pyc
+[1.431s] byte-compiling /home/gauri/obstacle-avoidance-drone/ros2_ws/install/obstacle_avoidance/lib/python3.10/site-packages/obstacle_avoidance/avoidance_node.py to avoidance_node.cpython-310.pyc
+[1.431s] running install_data
+[1.432s] copying resource/obstacle_avoidance -> /home/gauri/obstacle-avoidance-drone/ros2_ws/install/obstacle_avoidance/share/ament_index/resource_index/packages
+[1.432s] copying package.xml -> /home/gauri/obstacle-avoidance-drone/ros2_ws/install/obstacle_avoidance/share/obstacle_avoidance
+[1.432s] copying launch/sim.launch.py -> /home/gauri/obstacle-avoidance-drone/ros2_ws/install/obstacle_avoidance/share/obstacle_avoidance/launch
+[1.432s] running install_egg_info
+[1.448s] removing '/home/gauri/obstacle-avoidance-drone/ros2_ws/install/obstacle_avoidance/lib/python3.10/site-packages/obstacle_avoidance-0.0.1-py3.10.egg-info' (and everything under it)
+[1.451s] Copying ../../build/obstacle_avoidance/obstacle_avoidance.egg-info to /home/gauri/obstacle-avoidance-drone/ros2_ws/install/obstacle_avoidance/lib/python3.10/site-packages/obstacle_avoidance-0.0.1-py3.10.egg-info
+[1.452s] running install_scripts
+[1.483s] Installing avoidance_node script to /home/gauri/obstacle-avoidance-drone/ros2_ws/install/obstacle_avoidance/lib/obstacle_avoidance
+[1.484s] Installing camera_detector_node script to /home/gauri/obstacle-avoidance-drone/ros2_ws/install/obstacle_avoidance/lib/obstacle_avoidance
+[1.485s] Installing fusion_node script to /home/gauri/obstacle-avoidance-drone/ros2_ws/install/obstacle_avoidance/lib/obstacle_avoidance
+[1.485s] Installing lidar_node script to /home/gauri/obstacle-avoidance-drone/ros2_ws/install/obstacle_avoidance/lib/obstacle_avoidance
+[1.485s] Installing obstacle_detector script to /home/gauri/obstacle-avoidance-drone/ros2_ws/install/obstacle_avoidance/lib/obstacle_avoidance
+[1.485s] Installing radar_node script to /home/gauri/obstacle-avoidance-drone/ros2_ws/install/obstacle_avoidance/lib/obstacle_avoidance
+[1.486s] writing list of installed files to '/home/gauri/obstacle-avoidance-drone/ros2_ws/build/obstacle_avoidance/install.log'
+[1.521s] Invoked command in '/home/gauri/obstacle-avoidance-drone/ros2_ws/src/obstacle_avoidance' returned '0': PYTHONPATH=/home/gauri/obstacle-avoidance-drone/ros2_ws/build/obstacle_avoidance/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/gauri/obstacle-avoidance-drone/ros2_ws/install/obstacle_avoidance/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/obstacle_avoidance build --build-base /home/gauri/obstacle-avoidance-drone/ros2_ws/build/obstacle_avoidance/build install --record /home/gauri/obstacle-avoidance-drone/ros2_ws/build/obstacle_avoidance/install.log --install-scripts $base/lib/obstacle_avoidance --single-version-externally-managed install_data

@@ -34,6 +34,11 @@ setup(
     entry_points={
         'console_scripts': [
             'obstacle_detector = obstacle_avoidance.obstacle_detector:main',
+            'radar_node = obstacle_avoidance.radar_node:main',
+            'camera_detector_node = obstacle_avoidance.camera_detector_node:main',
+            'lidar_node = obstacle_avoidance.lidar_node:main',
+            'fusion_node = obstacle_avoidance.fusion_node:main',
+            'avoidance_node = obstacle_avoidance.avoidance_node:main',
         ],
     },
 )

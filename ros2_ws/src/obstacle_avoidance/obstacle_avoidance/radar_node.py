@@ -1,74 +1,58 @@
 import rclpy
 from rclpy.node import Node
-from visualization_msgs.msg import Marker, MarkerArray
+from std_msgs.msg import Float32MultiArray
 import math
-import random
+from pymavlink import mavutil
 
-# Match these to your actual demo_world.sdf obstacle positions.
-# Check with: grep -A 3 "obstacle_box\|obstacle_cyl" simulation/worlds/demo_world.sdf
-SIMULATED_OBSTACLES = [
+KNOWN_OBSTACLES = [
     {"id": "obstacle_box_1", "x": 3.0, "y": 1.0, "z": 0.5},
     {"id": "obstacle_cyl_1", "x": 5.0, "y": -2.0, "z": 0.5},
     {"id": "obstacle_box_2", "x": -2.0, "y": 3.0, "z": 0.5},
     {"id": "obstacle_cyl_2", "x": -4.0, "y": -1.0, "z": 0.5},
 ]
-
-RADAR_ORIGIN = (0.0, 0.0, 0.2)   # drone's approximate spawn point
-RADAR_MAX_RANGE = 15.0            # meters
-RANGE_NOISE_STDDEV = 0.05         # meters, simulates radar measurement noise
+NUM_SECTORS = 72
+MAX_RANGE_CM = 1500.0  # radar has longer range than lidar
 
 
 class RadarNode(Node):
     def __init__(self):
         super().__init__('radar_node')
-        self.publisher_ = self.create_publisher(MarkerArray, '/radar/detections', 10)
-        self.timer = self.create_timer(0.5, self.scan_callback)  # 2 Hz radar sweep
-        self.get_logger().info('Simulated radar node started, publishing on /radar/detections')
+        self.publisher_ = self.create_publisher(Float32MultiArray, '/radar/sector_distances_cm', 10)
+        self.drone_pos = (0.0, 0.0, 0.2)
+
+        self.master = mavutil.mavlink_connection('udp:127.0.0.1:14550')
+        self.get_logger().info('Radar node waiting for MAVLink heartbeat...')
+        self.master.wait_heartbeat()
+        self.get_logger().info('Radar node connected to MAVLink')
+
+        self.timer = self.create_timer(0.5, self.scan_callback)
+
+    def update_drone_position(self):
+        msg = self.master.recv_match(type='LOCAL_POSITION_NED', blocking=False)
+        if msg is not None:
+            self.drone_pos = (msg.x, msg.y, -msg.z)
 
     def scan_callback(self):
-        marker_array = MarkerArray()
-        ox, oy, oz = RADAR_ORIGIN
-        detections_in_range = 0
+        self.update_drone_position()
+        ox, oy, _ = self.drone_pos
+        sectors = [MAX_RANGE_CM] * NUM_SECTORS
 
-        for i, obs in enumerate(SIMULATED_OBSTACLES):
-            dx = obs["x"] - ox
-            dy = obs["y"] - oy
-            dz = obs["z"] - oz
-            true_range = math.sqrt(dx**2 + dy**2 + dz**2)
-
-            if true_range > RADAR_MAX_RANGE:
+        for obs in KNOWN_OBSTACLES:
+            dx, dy = obs["x"] - ox, obs["y"] - oy
+            dist_cm = math.sqrt(dx**2 + dy**2) * 100.0
+            if dist_cm > MAX_RANGE_CM:
                 continue
+            angle_deg = math.degrees(math.atan2(dy, dx))
+            if angle_deg < 0:
+                angle_deg += 360.0
+            sector_idx = int(angle_deg / 5.0) % NUM_SECTORS
+            if dist_cm < sectors[sector_idx]:
+                sectors[sector_idx] = dist_cm
+            self.get_logger().info(f'Radar: {obs["id"]} sector {sector_idx} at {dist_cm/100:.2f} m')
 
-            noisy_range = true_range + random.gauss(0, RANGE_NOISE_STDDEV)
-            detections_in_range += 1
-
-            marker = Marker()
-            marker.header.frame_id = 'map'
-            marker.header.stamp = self.get_clock().now().to_msg()
-            marker.ns = 'radar'
-            marker.id = i
-            marker.type = Marker.SPHERE
-            marker.action = Marker.ADD
-            marker.pose.position.x = obs["x"]
-            marker.pose.position.y = obs["y"]
-            marker.pose.position.z = obs["z"]
-            marker.pose.orientation.w = 1.0
-            marker.scale.x = 0.4
-            marker.scale.y = 0.4
-            marker.scale.z = 0.4
-            marker.color.r = 1.0
-            marker.color.g = 0.0
-            marker.color.b = 0.0
-            marker.color.a = 0.8
-            marker_array.markers.append(marker)
-
-            self.get_logger().info(
-                f'Radar detection: {obs["id"]} at range {noisy_range:.2f} m'
-            )
-
-        self.publisher_.publish(marker_array)
-        if detections_in_range == 0:
-            self.get_logger().info('Radar sweep complete: no obstacles in range')
+        out = Float32MultiArray()
+        out.data = sectors
+        self.publisher_.publish(out)
 
 
 def main(args=None):

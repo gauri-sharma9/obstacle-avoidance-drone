@@ -2,8 +2,12 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
+from std_msgs.msg import String
+import json
 import cv2
 import numpy as np
+
+CAMERA_TOPIC = '/camera'
 
 
 class CameraDetectorNode(Node):
@@ -12,18 +16,17 @@ class CameraDetectorNode(Node):
         self.bridge = CvBridge()
         self.subscription = self.create_subscription(
             Image,
-            '/world/demo_world/model/iris_with_gimbal/model/gimbal/link/pitch_link/sensor/camera/image',
+            CAMERA_TOPIC,
             self.image_callback,
             10
         )
-        self.get_logger().info('Camera detector node started, waiting for images...')
+        self.status_pub = self.create_publisher(String, '/camera/detection_status', 10)
+        self.get_logger().info(f'Camera detector node started, subscribed to {CAMERA_TOPIC}')
 
     def image_callback(self, msg):
         frame = self.bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-        # Thresholds tuned for your obstacle colors (red/orange boxes, blue cylinders)
-        # Adjust these ranges after checking actual rendered colors
         red_lower = np.array([0, 100, 100])
         red_upper = np.array([10, 255, 255])
         blue_lower = np.array([100, 100, 100])
@@ -37,7 +40,7 @@ class CameraDetectorNode(Node):
         detections = 0
         for c in contours:
             area = cv2.contourArea(c)
-            if area > 200:  # filter noise
+            if area > 200:
                 x, y, w, h = cv2.boundingRect(c)
                 detections += 1
                 self.get_logger().info(
@@ -46,6 +49,10 @@ class CameraDetectorNode(Node):
 
         if detections == 0:
             self.get_logger().info('Camera frame processed: no obstacles detected')
+
+        status = String()
+        status.data = json.dumps({"count": detections})
+        self.status_pub.publish(status)
 
 
 def main(args=None):

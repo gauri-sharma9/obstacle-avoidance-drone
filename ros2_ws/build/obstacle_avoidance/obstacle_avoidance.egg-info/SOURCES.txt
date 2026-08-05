@@ -14,7 +14,17 @@ obstacle_avoidance/avoidance_node.py
 obstacle_avoidance/camera_detector_node.py
 obstacle_avoidance/fusion_node.py
 obstacle_avoidance/lidar_detector_node.py
+obstacle_avoidance/lidar_sector_node.py
 obstacle_avoidance/mavlink_command_node.py
+obstacle_avoidance/mavlink_obstacle_node.py
+obstacle_avoidance/mission_commander_node.py
 obstacle_avoidance/obstacle_detector.py
 obstacle_avoidance/radar_node.py
+obstacle_avoidance.egg-info/PKG-INFO
+obstacle_avoidance.egg-info/SOURCES.txt
+obstacle_avoidance.egg-info/dependency_links.txt
+obstacle_avoidance.egg-info/entry_points.txt
+obstacle_avoidance.egg-info/requires.txt
+obstacle_avoidance.egg-info/top_level.txt
+obstacle_avoidance.egg-info/zip-safe
 resource/obstacle_avoidance

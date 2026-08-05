@@ -3,5 +3,9 @@ avoidance_node = obstacle_avoidance.avoidance_node:main
 camera_detector_node = obstacle_avoidance.camera_detector_node:main
 fusion_node = obstacle_avoidance.fusion_node:main
 lidar_detector_node = obstacle_avoidance.lidar_detector_node:main
+lidar_sector_node = obstacle_avoidance.lidar_sector_node:main
+mavlink_obstacle_node = obstacle_avoidance.mavlink_obstacle_node:main
+mission_commander_node = obstacle_avoidance.mission_commander_node:main
 obstacle_detector = obstacle_avoidance.obstacle_detector:main
 radar_node = obstacle_avoidance.radar_node:main
+

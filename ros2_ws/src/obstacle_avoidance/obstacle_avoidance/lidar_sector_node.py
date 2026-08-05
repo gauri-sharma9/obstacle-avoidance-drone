@@ -24,7 +24,7 @@ class LidarSectorNode(Node):
         for point in pc2.read_points(msg, field_names=("x", "y", "z"), skip_nans=True):
             x, y = point[0], point[1]
             dist_cm = math.sqrt(x**2 + y**2) * 100.0
-            if dist_cm > MAX_RANGE_CM:
+            if dist_cm > MAX_RANGE_CM or dist_cm < 20.0:  # Ignore self-reflections on drone body (<20cm)
                 continue
             angle_deg = math.degrees(math.atan2(y, x))
             if angle_deg < 0:

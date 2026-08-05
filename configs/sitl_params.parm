@@ -1,0 +1,52 @@
+# =============================================================================
+# sitl_params.parm — ArduPilot SITL parameters for obstacle avoidance demo
+#
+# Apply with:
+#   MAVProxy> param load ~/obstacle-avoidance-drone/configs/sitl_params.parm
+# Or pass to sim_vehicle.py:
+#   sim_vehicle.py ... --add-param-file=~/obstacle-avoidance-drone/configs/sitl_params.parm
+# =============================================================================
+
+# ── Proximity sensor (MAVLink OBSTACLE_DISTANCE input) ─────────────────────
+# PRX1_TYPE 2 = MAVLink proximity (receives OBSTACLE_DISTANCE messages)
+PRX1_TYPE       2
+# Max range advertised to ArduPilot (metres)
+PRX1_MAX        15
+# Min range (metres)
+PRX1_MIN        0.1
+# Yaw orientation offset — 0 = sensor forward = drone forward
+PRX1_YAW_CORR  0
+
+# ── Object Avoidance ─────────────────────────────────────────────────────────
+# OA_TYPE:
+#   0 = disabled
+#   1 = BendyRuler (reactive, fast, good for narrow corridors)
+#   2 = Dijkstra   (global, better for open spaces)
+OA_TYPE         1
+
+# BendyRuler specific
+OA_BR_LOOKAHEAD 3       # seconds ahead to project path
+OA_MARGIN_MAX   2.0     # metres margin around obstacle
+OA_OPTIONS      0       # default
+
+# ── AVOID enable bitmask ─────────────────────────────────────────────────────
+# AVOID_ENABLE bitmask:
+#   1 = use fence
+#   2 = use proximity sensor
+#   4 = use beacon fence
+# Set to 2 to use proximity sensor (OBSTACLE_DISTANCE) only
+AVOID_ENABLE    2
+AVOID_MARGIN    2.0     # safety margin (metres)
+AVOID_BEHAVE    0       # 0 = slide around obstacle, 1 = stop
+
+# ── Speed limits during avoidance ────────────────────────────────────────────
+WPNAV_SPEED     300     # cm/s cruise speed (3 m/s — safe for test)
+WPNAV_SPEED_UP  150     # cm/s climb speed
+
+# ── Flight mode / arming ─────────────────────────────────────────────────────
+ARMING_CHECK    0       # Disable pre-arm checks for SITL demo
+FS_THR_ENABLE   0       # Disable throttle failsafe in simulation
+SYSID_THISMAV   1
+
+# ── Logging ──────────────────────────────────────────────────────────────────
+LOG_BITMASK     65535   # Log everything for analysis

@@ -745,8 +745,9 @@
       <!-- Port settings -->
       <fdm_addr>127.0.0.1</fdm_addr>
       <fdm_port_in>9002</fdm_port_in>
+      <fdm_port_out>9003</fdm_port_out>
       <connectionTimeoutMaxCount>5</connectionTimeoutMaxCount>
-      <lock_step>1</lock_step>
+      <lock_step>0</lock_step>
 
       <!-- Frame conventions
         Require by ArduPilot: change model and gazebo from XYZ to XY-Z coordinates
